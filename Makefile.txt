@@ -1,0 +1,20 @@
+# Makefile for talk/speak/shout program
+# CSE 374 demo, 07au-15au HP
+
+# default target
+talk: main.o speak.o shout.o
+	gcc -Wall -g -std=c11 -o talk main.o speak.o shout.o
+
+# individual source files
+speak.o: speak.c speak.h
+	gcc -Wall -g -std=c11 -c speak.c
+
+shout.o: shout.c shout.h speak.h
+	gcc -Wall -g -std=c11 -c shout.c
+
+main.o: main.c speak.h shout.h
+	gcc -Wall -g -std=c11 -c main.c
+
+# "phony" target to remove built files and backups
+clean:
+	rm -f *.o talk *~
